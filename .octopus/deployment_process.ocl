@@ -83,12 +83,12 @@ step "run-a-script" {
         properties = {
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                $externalIp = $OctopusParameters['Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp']
-                Write-Host $externalIp
+                externalIp=$(octo printvariable "Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp")
+                echo $externalIp
                 
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
-            Octopus.Action.Script.Syntax = "PowerShell"
+            Octopus.Action.Script.Syntax = "Bash"
         }
         worker_pool = "default-worker-pool-1"
     }
