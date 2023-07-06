@@ -71,3 +71,21 @@ step "deploy-raw-kubernetes-yaml" {
         worker_pool = "default-worker-pool-1"
     }
 }
+
+step "run-a-script" {
+    name = "Run a Script"
+    properties = {
+        Octopus.Action.TargetRoles = "octodev,octoprod,octotest"
+    }
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = "write-host #{Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp}"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = ""
+    }
+}
