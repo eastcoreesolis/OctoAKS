@@ -74,9 +74,6 @@ step "deploy-raw-kubernetes-yaml" {
 
 step "run-a-script" {
     name = "Run a Script"
-    properties = {
-        Octopus.Action.TargetRoles = "octodev,octoprod,octotest"
-    }
 
     action {
         action_type = "Octopus.Script"
@@ -90,6 +87,6 @@ step "run-a-script" {
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "Bash"
         }
-        worker_pool = "default-worker-pool-1"
+        worker_pool = "hosted-ubuntu"
     }
 }
