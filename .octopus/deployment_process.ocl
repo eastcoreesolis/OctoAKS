@@ -55,18 +55,14 @@ step "deploy-raw-kubernetes-yaml" {
                 kind: Service
                 metadata:
                   name: timeserv
-                  labels:
-                    app: timeserv
                 spec:
+                  type: LoadBalancer
                   selector:
                     app: timeserv
-                  type: NodePort
                   ports:
-                  - port: 80
-                    nodePort: 30080
-                    targetPort: 8080
-                    protocol: TCP
-                    name: timeserv
+                    - protocol: TCP
+                      port: 80
+                      targetPort: 8080
                 EOT
             Octopus.Action.KubernetesContainers.Namespace = "default"
             Octopus.Action.Script.ScriptSource = "Inline"
