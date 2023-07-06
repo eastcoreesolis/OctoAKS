@@ -1,7 +1,7 @@
 step "deploy-raw-kubernetes-yaml" {
     name = "Deploy raw Kubernetes YAML"
     properties = {
-        Octopus.Action.TargetRoles = "octodev"
+        Octopus.Action.TargetRoles = "octodev,octoprod,octotest"
     }
 
     action {
@@ -65,6 +65,7 @@ step "deploy-raw-kubernetes-yaml" {
                       targetPort: 8080
                 EOT
             Octopus.Action.KubernetesContainers.Namespace = "default"
+            Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptSource = "Inline"
         }
         worker_pool = "default-worker-pool-1"
