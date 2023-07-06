@@ -82,7 +82,11 @@ step "run-a-script" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.RunOnServer = "false"
-            Octopus.Action.Script.ScriptBody = "write-host #{Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp}"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                $externalIp = $OctopusParameters['Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp']
+                Write-Host $externalIp
+                
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
         }
