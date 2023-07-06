@@ -32,28 +32,28 @@ step "deploy-raw-kubernetes-yaml" {
                 apiVersion: apps/v1
                 kind: Deployment
                 metadata:
-                  name: admin-nginx-deployment
+                  name: timeserv
                 spec:
                   replicas: 1
                   selector:
                     matchLabels:
-                      app: admin-nginx
+                      app: timeserv
                   template:
                     metadata:
                       labels:
-                        app: admin-nginx
+                        app: timeserv
                     spec:
                       serviceAccountName: admin-sa
                       containers:
-                        - name: admin-nginx
-                          image: nginx
+                        - name: timeserv
+                          image: eastcoreesolis/timeserv:1
                           ports:
-                            - containerPort: 80
+                            - containerPort: 8080
                 ---
                 apiVersion: v1
                 kind: Service
                 metadata:
-                  name: admin-nginx-service
+                  name: timeserv
                 spec:
                   type: LoadBalancer
                   selector:
