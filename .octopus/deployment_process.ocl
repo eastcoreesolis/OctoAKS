@@ -80,7 +80,7 @@ step "run-a-script" {
         properties = {
             Octopus.Action.RunOnServer = "true"
             Octopus.Action.Script.ScriptBody = <<-EOT
-                externalIp=$(octo printvariable "Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp")
+                externalIp=$("Octopus.Action[Deploy Kubernetes Resources].Output.Kubernetes.Service.ExternalIp")
                 echo $externalIp
                 
                 EOT
