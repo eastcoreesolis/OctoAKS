@@ -1,5 +1,8 @@
 step "deploy-raw-kubernetes-yaml" {
     name = "Deploy raw Kubernetes YAML"
+    properties = {
+        Octopus.Action.TargetRoles = "octodev"
+    }
 
     action {
         action_type = "Octopus.KubernetesDeployRawYaml"
@@ -43,6 +46,6 @@ step "deploy-raw-kubernetes-yaml" {
             Octopus.Action.KubernetesContainers.Namespace = "default"
             Octopus.Action.Script.ScriptSource = "Inline"
         }
-        worker_pool = "static-worker-pool-01"
+        worker_pool = "default-worker-pool-1"
     }
 }
